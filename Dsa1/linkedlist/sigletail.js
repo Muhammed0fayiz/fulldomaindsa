@@ -101,6 +101,19 @@ class LinkedList {
         }
         this.size--;
     }
+
+    reverse() {
+        let curr = this.head;
+        let prev = null;
+        this.tail = curr; // the current head will become the tail after reversing
+        while (curr) {
+            let next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        this.head = prev;
+    }
 }
 
 const ll = new LinkedList();
@@ -110,5 +123,8 @@ ll.append(3);
 ll.append(4);
 ll.append(5);
 ll.print();
-ll.removeindex(2); // Remove the first element (index 1)
+ll.removeindex(2); // Remove the second element (index 2)
+ll.print();
+
+ll.reverse();
 ll.print();

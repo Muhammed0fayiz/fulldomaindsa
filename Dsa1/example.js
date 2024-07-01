@@ -1,114 +1,136 @@
-class Node {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
+class Node{
+    constructor(value){
+        this.value=value;
+        this.next=null;
+        this.prev=null
     }
+
 }
 
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
+class doublelin{
+    constructor(){
+        this.head=null;
+        this.tail=null;
+        this.size=0
     }
-
     isempty() {
         return this.size === 0;
     }
-
-    prepend(value) {
-        let node = new Node(value);
-        if (this.isempty()) {
-            this.head = node;
-            this.tail = node;
-        } else {
-            node.next = this.head;
-            this.head = node;
+    append(value){
+        const node=new Node(value)
+        if(this.isempty()){
+            this.head=this.tail=node
         }
-        this.size++;
+        else{
+            node.prev=this.tail;
+            this.tail.next=node;
+            this.tail=node
+
+
+        }
+        this.size++
+
     }
 
-    append(value) {
-        const node = new Node(value);
-        if (this.isempty()) {
-            this.head = node;
-            this.tail = node;
-        } else {
-            this.tail.next = node;
-            this.tail = node;
+    prepend(value){
+        const node=new Node(value)
+        if(this.isempty()){
+            this.head=this.tail=node
+        }else{
+            node.next=this.head;
+           this.head.prev=node;
+           this.head=node
         }
-        this.size++;
+        this.size++
     }
-
-    firstdel() {
-        if (this.isempty()) {
-            return null;
-        } else {
-            this.head = this.head.next;
-            if (this.head === null) {
-                this.tail = null;
-            }
-            this.size--;
+    print(){
+        let curr=this.head;
+       let listed=''
+        while(curr){
+            listed=listed+`${curr.value}=>`
+            curr=curr.next;
         }
+        console.log(listed);
     }
-
-    lastdel() {
-        if (this.isempty()) {
-            return null;
-        } else if (this.size === 1) {
-            this.head = null;
-            this.tail = null;
-        } else {
-            let curr = this.head;
-            while (curr.next !== this.tail) {
-                curr = curr.next;
-            }
-            curr.next = null;
-            this.tail = curr;
+    firstremove(){
+        if(this.isempty()){
+            return -1
         }
-        this.size--;
+        if(this.head===this.tail){
+            this.head=this.tail=null
+        }
+        else{
+            this.head=this.head.next;
+        }this.size--
     }
-
-    print() {
-        let curr = this.head;
-        let arr = '';
-        while (curr) {
-            arr += `${curr.value} -> `;
-            curr = curr.next;
+    lastremove(){
+        if(this.isempty()){
+            return -1
         }
-        console.log(arr);
+        if(this.head===this.tail){
+            this.head=this.tail=null
+        }else{
+            this.tail=this.tail.prev
+            this.tail.next=null
+        }
+        this.size--
     }
-
-    removeindex(index) {
-        if (index < 0 || index >= this.size) {
-            return -1;
+   elemremove(value){ 
+    if(this.isempty()){
+        return -1
+    }
+    if(this.head===this.tail&&this.head.value===value){
+        this.head=this.tail=null
+    }else{
+        let curr=this.head;
+        while(curr&&curr.value!==value){
+            curr=curr.next
         }
-        if (index === 0) {
-            this.head = this.head.next;
-            if (this.head === null) {
-                this.tail = null;
-            }
-        } else {
-            let curr = this.head;
-            for (let i = 1; i < index; i++) {
-                curr = curr.next;
-            }
-            let remove = curr.next;
-            curr.next = remove.next;
-            if (curr.next === null) {
-                this.tail = curr;
+        if(curr.value===value){
+            if(curr.next){
+                    curr=curr.prev;
+                    curr.next=null
+            }else{
+                let next=curr.next;
+                
+                curr.next=next.next
+
             }
         }
-        this.size--;
+
+            
+        {
+            
+        }
     }
+
+   }
 }
 
-const ll = new LinkedList();
-ll.append(1);
-ll.append(2);
-ll.append(3);
-ll.append(4);
-ll.append(5);
-ll.print();
-ll.removeindex(1); // Remove the second element (index 1)
-ll.print();
+const li=new doublelin()
+
+li.append(1)
+li.print()
+li.firstremove()
+console.log('el');
+li.print()
+console.log('el');
+li.append(2)
+li.append(3)
+li.append(4)
+li.append(5)
+li.print()
+li.prepend(0)
+li.print()
+li.prepend(10)
+li.print()
+
+console.log(li.tail.prev.value)
+console.log(li.head.prev)
+li.firstremove()
+li.print()
+li.lastremove()
+li.print()
+li.elemremove(2)
+console.log('elem');
+li.print()
