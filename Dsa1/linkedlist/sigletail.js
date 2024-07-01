@@ -79,18 +79,18 @@ class LinkedList {
         console.log(arr);
     }
 
-    removeindex(index) {
-        if (index < 0 || index >= this.size) {
+    removeindex(elem) {
+        if (elem < 1 || elem > this.size) {
             return -1;
         }
-        if (index === 0) {
+        if (elem === 1) {
             this.head = this.head.next;
             if (this.head === null) {
                 this.tail = null;
             }
         } else {
             let curr = this.head;
-            for (let i = 1; i < index; i++) {
+            for (let i = 1; i < elem - 1; i++) {
                 curr = curr.next;
             }
             let remove = curr.next;
@@ -110,5 +110,5 @@ ll.append(3);
 ll.append(4);
 ll.append(5);
 ll.print();
-ll.removeindex(1); // Remove the second element (index 1)
+ll.removeindex(2); // Remove the first element (index 1)
 ll.print();
