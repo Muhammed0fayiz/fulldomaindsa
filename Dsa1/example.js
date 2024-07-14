@@ -1,136 +1,59 @@
+
 class Node{
     constructor(value){
         this.value=value;
-        this.next=null;
-        this.prev=null
+        this.next=null
     }
-
 }
-
-class doublelin{
+class stack{
     constructor(){
-        this.head=null;
-        this.tail=null;
+        this.first=null;
+        this.last=null;
         this.size=0
     }
-    isempty() {
-        return this.size === 0;
+    isEmpty(){
+        return this.size===0
     }
-    append(value){
+    push(value){
         const node=new Node(value)
-        if(this.isempty()){
-            this.head=this.tail=node
-        }
-        else{
-            node.prev=this.tail;
-            this.tail.next=node;
-            this.tail=node
-
-
-        }
-        this.size++
-
-    }
-
-    prepend(value){
-        const node=new Node(value)
-        if(this.isempty()){
-            this.head=this.tail=node
+        if(this.isEmpty()){
+            this.first=node;
+            this.last=node
         }else{
-            node.next=this.head;
-           this.head.prev=node;
-           this.head=node
+            let temp=this.first;
+            this.first=node;
+            this.first.next=temp
         }
+     
         this.size++
+    }
+    pop() {
+     if(!this.first){
+        return null
+     }if(this.first===this.last){
+        return null
+     }this.first=this.first.next;
+     this.size--
     }
     print(){
-        let curr=this.head;
-       let listed=''
-        while(curr){
-            listed=listed+`${curr.value}=>`
-            curr=curr.next;
-        }
-        console.log(listed);
-    }
-    firstremove(){
-        if(this.isempty()){
-            return -1
-        }
-        if(this.head===this.tail){
-            this.head=this.tail=null
-        }
-        else{
-            this.head=this.head.next;
-        }this.size--
-    }
-    lastremove(){
-        if(this.isempty()){
-            return -1
-        }
-        if(this.head===this.tail){
-            this.head=this.tail=null
+        if(this.isEmpty()){
+            console.log('novalue')
         }else{
-            this.tail=this.tail.prev
-            this.tail.next=null
-        }
-        this.size--
-    }
-   elemremove(value){ 
-    if(this.isempty()){
-        return -1
-    }
-    if(this.head===this.tail&&this.head.value===value){
-        this.head=this.tail=null
-    }else{
-        let curr=this.head;
-        while(curr&&curr.value!==value){
-            curr=curr.next
-        }
-        if(curr.value===value){
-            if(curr.next){
-                    curr=curr.prev;
-                    curr.next=null
-            }else{
-                let next=curr.next;
-                
-                curr.next=next.next
-
+            let curr=this.first;
+            let val="";
+            while(curr){
+                val=val+`${curr.value} `
+                curr=curr.next
             }
-        }
+            console.log(val)
 
-            
-        {
-            
         }
     }
-
-   }
 }
+const stacks=new stack()
+stacks.push(4)
+stacks.push(44)
+stacks.push(43)
+stacks.push(448)
+stacks.print()
 
-const li=new doublelin()
-
-li.append(1)
-li.print()
-li.firstremove()
-console.log('el');
-li.print()
-console.log('el');
-li.append(2)
-li.append(3)
-li.append(4)
-li.append(5)
-li.print()
-li.prepend(0)
-li.print()
-li.prepend(10)
-li.print()
-
-console.log(li.tail.prev.value)
-console.log(li.head.prev)
-li.firstremove()
-li.print()
-li.lastremove()
-li.print()
-li.elemremove(2)
-console.log('elem');
-li.print()

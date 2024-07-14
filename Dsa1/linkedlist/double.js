@@ -105,6 +105,27 @@ class doublelin {
             }
         }
     }
+
+    removePosition(position) {
+        if (position < 1 || position > this.size) {
+            return -1; // Invalid position
+        }
+        if (position === 1) {
+            this.firstremove();
+        } else if (position === this.size) {
+            this.lastremove();
+        } else {
+            let curr = this.head;
+            let count = 1;
+            while (count < position) {
+                curr = curr.next;
+                count++;
+            }
+            curr.prev.next = curr.next;
+            curr.next.prev = curr.prev;
+            this.size--;
+        }
+    }
 }
 
 // Testing the implementation
@@ -121,17 +142,5 @@ li.append(3);
 li.append(4);
 li.append(5);
 li.print();
-li.prepend(0);
-li.print();
-li.prepend(10);
-li.print();
-
-console.log(li.tail.prev.value);
-console.log(li.head.prev);
-li.firstremove();
-li.print();
-li.lastremove();
-li.print();
-li.elemremove(25);
-console.log('elem');
+li.removePosition(1)
 li.print();
