@@ -64,4 +64,13 @@ sl.push(3)
 sl.print()
 sl.pop()
 sl.print()
-console.log(sl.peak());
+console.log(sl.peak(
+
+
+
+
+
+
+
+    
+));

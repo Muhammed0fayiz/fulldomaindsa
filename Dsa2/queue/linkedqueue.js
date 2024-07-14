@@ -1,38 +1,29 @@
 class Node{
     constructor(value){
-       this.value=value
-       this.next=null
+        this.value=value;
+        this.next=null
     }
 }
-
-class qu{
+class queue{
     constructor(){
-        this.first=null;
-        this.last=null;
+        this.first=null
+        this.last=null
         this.size=0
     }
-
     isEmpty(){
         return this.size===0
-
     }
+
     enqueue(value){
         const node=new Node(value)
         if(this.isEmpty()){
-            this.first=this.last=node
+            this.first=this.last=node;
         }else{
+           
             this.last.next=node;
-            this.last=node;
+            this.last=node
         }this.size++
-    }
-    dqueue(){
-        if(this.isEmpty()){
-            return null
-        }if(this.first===this.last){
-            this.last=null
-        }else{
-            this.first=this.first.next
-        }this.size--
+     
     }
     print() {
         if (this.isEmpty()) {
@@ -45,16 +36,27 @@ class qu{
                 curr = curr.next;
             }
             console.log(val);
-        }}
-}
+        }
+    }
+    dqueue(){
+        if(this.isEmpty()){
+            return null
+        }if(this.first===this.last){
+            this.last=null
+        }else{
+            this.first=this.first.next
+        }this.size--
+    }
 
-const li=new qu()
-li.print()
-li.enlieue(1)
-li.print()
-li.enlieue(2)
-li.print()
-li.enlieue(3)
-li.print()
-li.enlieue(4)
-li.print()
+
+
+}
+let qu=new queue()
+qu.enqueue(4)
+qu.print()
+qu.enqueue(41)
+qu.print()
+qu.dqueue()
+qu.print()
+qu.dqueue()
+qu.print()
